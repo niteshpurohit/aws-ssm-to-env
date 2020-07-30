@@ -60,9 +60,9 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_REGION: ${{ secrets.AWS_REGION }} 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #optional
         with:
           ssm_parameter: 'my_parameter_name'
 ```
@@ -86,9 +86,9 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #optional
         with:
           ssm_parameter: 'my_parameter_name'
           prefix: FOO_
@@ -113,8 +113,8 @@ jobs:
         uses: bomb-on/aws-ssm-to-env@master
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #optional
         with:
           ssm_parameter: 'my_json_parameter'
           simple_json: true
@@ -146,9 +146,9 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #optional
         with:
           ssm_parameter: 'my_json_parameter'
           jq_filter: '.db[]|select(.default).host .db[]|select(.default).port'
