@@ -21,7 +21,7 @@ cat ~/.aws/credentials
 
 region="$AWS_REGION"
 parameter_name="$INPUT_SSM_PARAMETER"
-prefix="${INPUT_PREFIX:-AWS_SSM_}"
+prefix="${INPUT_PREFIX:-}"
 jq_filter="$INPUT_JQ_FILTER"
 simple_json="$INPUT_SIMPLE_JSON"
 ssm_param=$(aws --region "$region" ssm get-parameter --name "$parameter_name")
