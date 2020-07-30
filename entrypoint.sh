@@ -12,6 +12,11 @@ if [[ -z "$INPUT_SSM_PARAMETER" ]]; then
   exit 1
 fi
 
+aws --profile "default" configure set "aws_access_key_id" "$AWS_ACCESS_KEY_ID"
+aws --profile "default" configure set "aws_secret_access_key" "$AWS_SECRET_ACCESS_KEY"
+aws --profile "default" configure set "aws_session_token" "$AWS_SESSION_TOKEN"
+aws --profile "default" configure set "region" "$AWS_REGION"
+
 region="$AWS_REGION"
 parameter_name="$INPUT_SSM_PARAMETER"
 prefix="${INPUT_PREFIX:-AWS_SSM_}"
