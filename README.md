@@ -37,7 +37,7 @@ Action expects 3 secrets to be set in GitHub's repository:
 Parameter name | Type | Required | Default Value | Description
 --- | --- | --- | --- | ---
 `ssm_parameter` | string | true | | AWS Systems Manager parameter name (path)
-`prefix` | string | false | AWS_SSM_ | Custom environmental variables prefix
+`prefix` | string | false | '' | Custom environmental variables prefix
 `simple_json` | boolean | true | false | Parse parameter values as one-level JSON object and convert keys to environmental variables (see example below).
 `jq_params` | string | true | | Custom space-separated [`jq` filters](https://stedolan.github.io/jq/) (see example below).
 
@@ -66,7 +66,7 @@ jobs:
           ssm_parameter: 'my_parameter_name'
 ```
 
-Example above will set environmental variable `AWS_SSM_MY_PARAMETER_NAME` with value from the AWS SSM parameter itself.
+Example above will set environmental variable `MY_PARAMETER_NAME` with value from the AWS SSM parameter itself.
 
 #### Custom prefix
 
@@ -125,8 +125,8 @@ If `my_json_parameter` in the example above is a JSON string like
 ```
 environmental variables will be set as:
 ```sh
-AWS_SSM_FOO=bar
-AWS_SSM_BAZ=1
+FOO=bar
+BAZ=1
 ```
 
 #### Complex JSON values
