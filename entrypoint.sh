@@ -2,8 +2,8 @@
 
 set -e
 
-if [[ -z "$AWS_REGION" ]] || [[ -z "$AWS_ACCESS_KEY_ID" ]] || [[ -z "$AWS_SECRET_ACCESS_KEY" ]]; then
-  echo "Ensure that all environmental variables (AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) are set!"
+if [[ -z "$AWS_REGION" ]]; then
+  echo "Ensure that all environmental variables (AWS_REGION) is set!"
   exit 1
 fi
 
