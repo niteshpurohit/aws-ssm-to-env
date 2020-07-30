@@ -17,8 +17,6 @@ aws --profile "default" configure set "aws_secret_access_key" $AWS_SECRET_ACCESS
 aws --profile "default" configure set "aws_session_token" $AWS_SESSION_TOKEN
 aws --profile "default" configure set "region" $AWS_REGION
 
-cat ~/.aws/credentials
-
 region="$AWS_REGION"
 parameter_name="$INPUT_SSM_PARAMETER"
 prefix="${INPUT_PREFIX:-}"
@@ -36,16 +34,19 @@ if [ -n "$jq_filter" ] || [ -n "$simple_json" ]; then
     for p in $(echo "$ssm_param_value" | jq -r --arg v "$prefix" 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' ); do
       IFS='=' read -r var_name var_value <<< "$p"
       echo ::set-env name="$(format_var_name "$var_name")"::"$var_value"
+      echo ::add-mask::$var_value
     done
   else
     IFS=' ' read -r -a params <<< "$jq_filter"
     for var_name in "${params[@]}"; do
       var_value=$(echo "$ssm_param_value" | jq -r -c "$var_name")
       echo ::set-env name="$(format_var_name "$var_name")"::"$var_value"
+      echo ::add-mask::$var_value
     done
   fi
 else
   var_name=$(echo "$ssm_param" | jq -r '.Parameter.Name' | awk -F/ '{print $NF}')
   var_value=$(echo "$ssm_param" | jq -r '.Parameter.Value')
   echo ::set-env name="$(format_var_name "$var_name")"::"$var_value"
+  echo ::add-mask::$var_value
 fi
