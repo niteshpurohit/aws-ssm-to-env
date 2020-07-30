@@ -13,7 +13,6 @@
         * [Custom prefix](#custom-prefix)
         * [Simple JSON parameter values](#simple-json-parameter-values)
         * [Complex JSON values](#complex-json-values)
-  * [TODO](#todo)
 
 ## About
 
@@ -25,8 +24,10 @@ a shortcut parameter `simple_json` can be used to convert all key-values from JS
 
 ## Requirements
 
-Action expects 3 secrets to be set in GitHub's repository:
+Action expects 1 secret to be set in GitHub's repository:
 - `AWS_REGION` - AWS Region (e.g. `us-east1`)
+
+Below secrets can be set or ignored if running the runner in AWS. Make sure to give appropriate permission to IamRole of the runner. 
 - `AWS_ACCESS_KEY_ID` - AWS Access Key for user with an SSM access policy (e.g. [AmazonSSMReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess$serviceLevelSummary))
 - `AWS_SECRET_ACCESS_KEY` - User's AWS Access Key
 
@@ -59,8 +60,8 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           ssm_parameter: 'my_parameter_name'
@@ -85,8 +86,8 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           ssm_parameter: 'my_parameter_name'
@@ -145,8 +146,8 @@ jobs:
       - name: aws-ssm-to-env
         uses: bomb-on/aws-ssm-to-env@master
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }} #optional
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #optional
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           ssm_parameter: 'my_json_parameter'
@@ -163,8 +164,3 @@ environmental variables will be set as:
 DB_HOST=my.db.host.com
 DB_PORT=1337
 ```
-
-## TODO
-
- - [x] ~~Use official Docker container once it becomes available (https://github.com/aws/aws-cli/issues/3291, https://github.com/aws/aws-cli/issues/4685)~~
- - [ ] Write tests (https://github.com/kward/shunit2)
